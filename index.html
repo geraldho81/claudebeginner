@@ -826,6 +826,114 @@
 </section>
 
 
+<!-- 11d. CLAUDE CODE: MODES & PERMISSIONS -->
+<section id="sec-modes" data-nav="modes" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">Claude Code · Staying in Control</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:16px;">You Decide How Much It Can Do</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:64ch;margin:0 auto 48px;">When Claude Code works on your computer, you are always the boss. There are just two controls to learn: the <strong style="color:var(--cyan);">mode</strong> you put it in, and your <strong style="color:var(--acid);">answer</strong> each time it asks.</p>
+
+    <p class="section-kicker reveal" style="color:var(--cyan);">Control One</p>
+    <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3.4vw,38px);margin-bottom:8px;" class="reveal">Pick a Mode</h3>
+    <p class="body-md reveal" style="max-width:60ch;margin-bottom:26px;color:var(--muted);">The mode sets how often Claude stops to check with you. Press <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Shift</span> <span class="kbd-plus">+</span> <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Tab</span> to switch between them. The current one always shows at the bottom of the window.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:52px;" class="three-col">
+      <div class="card-cyan reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Ask first · the default</p>
+        <h3 style="margin-bottom:6px;">It checks with you</h3>
+        <p class="body-md">Claude stops and asks before it changes a file or runs anything. You say yes or no each time. Best while you are learning.</p>
+      </div>
+      <div class="card reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Plan first</p>
+        <h3 style="margin-bottom:6px;">It shows its plan</h3>
+        <p class="body-md">Claude looks around and writes out exactly what it intends to do, changing nothing, until you approve the plan. Great for seeing its thinking first.</p>
+      </div>
+      <div class="card-acid reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--acid);margin-bottom:10px;">Auto</p>
+        <h3 style="color:var(--acid);margin-bottom:6px;">It just goes</h3>
+        <p class="body-md">Claude makes its changes and keeps moving without stopping to ask each time. Fast, for tasks you already trust. Use it once you are comfortable.</p>
+      </div>
+    </div>
+
+    <p class="section-kicker reveal" style="color:var(--acid);">Control Two</p>
+    <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3.4vw,38px);margin-bottom:8px;" class="reveal">Answer Each Request</h3>
+    <p class="body-md reveal" style="max-width:60ch;margin-bottom:26px;color:var(--muted);">In Ask mode, a little prompt pops up before Claude acts. You have three choices, every single time.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;" class="three-col">
+      <div class="desk-window reveal">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude Code</b></div>
+        <div style="padding:22px 20px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);margin-bottom:10px;">Permission needed</p>
+          <p class="body-md" style="color:var(--ink);margin-bottom:18px;">Claude wants to edit <code>index.html</code></p>
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <span class="button primary" style="justify-content:flex-start;">Accept</span>
+            <span class="button secondary" style="justify-content:flex-start;">Accept, and don't ask again</span>
+            <span class="button secondary" style="justify-content:flex-start;">Dismiss · Esc</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;">
+          <div class="step-num" style="background:rgba(183,255,42,0.18);">✓</div>
+          <div><h3 style="margin-bottom:4px;">Accept</h3><p class="body-md">Let Claude do this one action, then carry on.</p></div>
+        </div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;">
+          <div class="step-num" style="background:rgba(106,244,255,0.16);color:var(--cyan);">∞</div>
+          <div><h3 style="margin-bottom:4px;">Accept, and don't ask again</h3><p class="body-md">Allow this kind of action for the rest of the session, so it stops asking.</p></div>
+        </div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;">
+          <div class="step-num" style="background:rgba(244,241,234,0.1);color:var(--ink);">✕</div>
+          <div><h3 style="margin-bottom:4px;">Dismiss, or press Esc</h3><p class="body-md">Say no. Claude stops and waits for you to tell it what to do instead.</p></div>
+        </div>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:36px;color:var(--muted);max-width:66ch;margin-left:auto;margin-right:auto;">Beginner advice: stay in <strong style="color:var(--ink);">Ask first</strong> mode at the start. Read what Claude wants to do, then Accept. Once it feels familiar, try Plan mode for bigger jobs and Auto for the boring ones.</p>
+  </div>
+</section>
+
+
+<!-- 11e. REMOTE -->
+<section id="sec-remote" data-nav="remote" class="section-band">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;margin-bottom:44px;" class="three-col">
+      <div>
+        <p class="section-kicker reveal">Hands-Off, Anywhere</p>
+        <h2 class="reveal" style="margin-bottom:18px;">Remote: Let It<br>Run in the Cloud</h2>
+        <p class="body-lg reveal" style="margin-bottom:16px;">Remember the catch with a scheduled task on your computer? It only runs while the laptop is awake and the app is open. <strong style="color:var(--ink);">Remote</strong> is the way around that.</p>
+        <p class="body-md reveal">With remote, Claude does the work on its own computers in the cloud, not yours. Start a job, close your laptop, and walk away. It keeps going, and you can check on it later from any device, even your phone.</p>
+      </div>
+      <div class="desk-window reveal">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude · Remote</b></div>
+        <div class="desk-main" style="min-height:250px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);">Running in the cloud</p>
+          <div style="display:flex;align-items:center;gap:12px;background:rgba(183,255,42,0.08);border-radius:10px;padding:14px;">
+            <div style="width:9px;height:9px;border-radius:50%;background:var(--acid);"></div>
+            <div><p style="font-size:13px;color:var(--ink);">Building your weekly report</p><p style="font-size:11px;color:var(--soft);">On Claude's servers...</p></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:4px;">
+            <p class="body-md" style="color:var(--cyan);">✓ &nbsp;Safe to close your laptop</p>
+            <p class="body-md" style="color:var(--muted);">✓ &nbsp;We will ping you when it is done</p>
+            <p class="body-md" style="color:var(--muted);">✓ &nbsp;Pick up where it left off, on any device</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;" class="three-col">
+      <div class="card reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">On your computer · local</p>
+        <h3 style="margin-bottom:6px;">Runs on your machine</h3>
+        <p class="body-md">Fast, and it can touch your own files. But it only keeps working while your computer is awake and the app is open.</p>
+      </div>
+      <div class="card-acid reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--acid);margin-bottom:10px;">In the cloud · remote</p>
+        <h3 style="color:var(--acid);margin-bottom:6px;">Runs on Claude's machines</h3>
+        <p class="body-md">Keeps going with your laptop shut. Best for long jobs and overnight tasks. Check in from anywhere, even your phone.</p>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:30px;color:var(--muted);max-width:64ch;margin-left:auto;margin-right:auto;">Remote is one of the more advanced, paid features. As a beginner you do not need it on day one, but it is the answer the moment you think "I wish this could finish without my laptop staying on."</p>
+  </div>
+</section>
+
+
 <!-- 12. CONNECTORS -->
 <section id="sec-connectors" data-nav="connectors" style="min-height:100vh;display:flex;align-items:center;">
   <div class="split">
