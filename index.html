@@ -835,23 +835,43 @@
 
     <p class="section-kicker reveal" style="color:var(--cyan);">Control One</p>
     <h3 style="font-family:'Instrument Serif',Georgia,serif;font-weight:400;font-size:clamp(26px,3.4vw,38px);margin-bottom:8px;" class="reveal">Pick a Mode</h3>
-    <p class="body-md reveal" style="max-width:60ch;margin-bottom:26px;color:var(--muted);">The mode sets how often Claude stops to check with you. Press <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Shift</span> <span class="kbd-plus">+</span> <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Tab</span> to switch between them. The current one always shows at the bottom of the window.</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:52px;" class="three-col">
-      <div class="card-cyan reveal">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Ask first · the default</p>
-        <h3 style="margin-bottom:6px;">It checks with you</h3>
-        <p class="body-md">Claude stops and asks before it changes a file or runs anything. You say yes or no each time. Best while you are learning.</p>
+    <p class="body-md reveal" style="max-width:66ch;margin-bottom:28px;color:var(--muted);">The mode sets how much Claude can do on its own. There are <strong style="color:var(--ink);">four modes you cycle through</strong> with <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Shift</span> <span class="kbd-plus">+</span> <span class="kbd" style="height:28px;min-width:auto;font-size:11px;">Tab</span>, plus <strong style="color:var(--ink);">Bypass permissions</strong>, a separate switch you turn on yourself. The tick shows which one is active.</p>
+    <div style="display:grid;grid-template-columns:0.82fr 1.18fr;gap:4vw;align-items:center;margin-bottom:36px;" class="three-col">
+      <div class="reveal" style="display:flex;justify-content:center;">
+        <div class="desk-window" style="width:100%;max-width:330px;">
+          <div style="padding:14px 8px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);padding:2px 12px 10px;">Mode</p>
+            <div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:6px;"><span class="body-md" style="color:var(--ink);">Ask permissions</span><span style="color:var(--soft);font-family:'JetBrains Mono',monospace;">1</span></div>
+            <div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:6px;"><span class="body-md" style="color:var(--ink);">Accept edits</span><span style="color:var(--soft);font-family:'JetBrains Mono',monospace;">2</span></div>
+            <div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:6px;"><span class="body-md" style="color:var(--ink);">Plan mode</span><span style="color:var(--soft);font-family:'JetBrains Mono',monospace;">3</span></div>
+            <div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:6px;background:rgba(183,255,42,0.12);"><span class="body-md" style="color:var(--acid);">Auto mode</span><span style="color:var(--acid);font-family:'JetBrains Mono',monospace;">✓ 4</span></div>
+            <div style="display:flex;justify-content:space-between;padding:9px 12px;border-radius:6px;"><span class="body-md" style="color:var(--muted);">Bypass permissions</span><span style="color:var(--soft);font-family:'JetBrains Mono',monospace;font-size:11px;">Enable</span></div>
+          </div>
+        </div>
       </div>
-      <div class="card reveal">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">Plan first</p>
-        <h3 style="margin-bottom:6px;">It shows its plan</h3>
-        <p class="body-md">Claude looks around and writes out exactly what it intends to do, changing nothing, until you approve the plan. Great for seeing its thinking first.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card-cyan reveal" style="padding:15px 18px;"><h3 style="margin-bottom:3px;color:var(--cyan);">1 &middot; Ask permissions &nbsp;<span style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);">start here</span></h3><p class="body-md">Claude checks with you before it changes a file or runs anything. You approve each step. The safest.</p></div>
+        <div class="card reveal" style="padding:15px 18px;"><h3 style="margin-bottom:3px;">2 &middot; Accept edits</h3><p class="body-md">Claude edits files on its own, but still asks before bigger actions like running commands.</p></div>
+        <div class="card reveal" style="padding:15px 18px;"><h3 style="margin-bottom:3px;">3 &middot; Plan mode</h3><p class="body-md">Claude only looks and thinks. It writes out its plan and changes nothing until you approve it.</p></div>
+        <div class="card reveal" style="padding:15px 18px;"><h3 style="margin-bottom:3px;">4 &middot; Auto mode</h3><p class="body-md">Claude runs the whole task on its own, edits and commands, without stopping to ask. Keeps basic safety guardrails.</p></div>
+        <div class="card-acid reveal" style="padding:15px 18px;"><h3 style="margin-bottom:3px;color:var(--acid);">Bypass permissions</h3><p class="body-md" style="color:var(--muted);">Skips every check, including the risky ones. Not in the normal cycle, you switch it on yourself. Leave it off until you truly know why you want it.</p></div>
       </div>
-      <div class="card-acid reveal">
-        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--acid);margin-bottom:10px;">Auto</p>
-        <h3 style="color:var(--acid);margin-bottom:6px;">It just goes</h3>
-        <p class="body-md">Claude makes its changes and keeps moving without stopping to ask each time. Fast, for tasks you already trust. Use it once you are comfortable.</p>
-      </div>
+    </div>
+    <div class="reveal" style="overflow-x:auto;margin-bottom:52px;">
+      <table style="width:100%;border-collapse:collapse;min-width:540px;">
+        <thead><tr>
+          <th style="text-align:left;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);">Mode</th>
+          <th style="text-align:left;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);">Edits files without asking?</th>
+          <th style="text-align:left;padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--soft);">Runs commands without asking?</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);">Ask permissions</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);">No</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);">No</td></tr>
+          <tr><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);">Accept edits</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--acid);">Yes</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);">No</td></tr>
+          <tr><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);">Plan mode</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);">Changes nothing</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--soft);">No</td></tr>
+          <tr><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);">Auto mode</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--acid);">Yes</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--acid);">Yes <span style="color:var(--soft);">(guardrails)</span></td></tr>
+          <tr><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--ink);">Bypass permissions</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--acid);">Yes</td><td style="padding:13px 14px;border-top:1px solid var(--line);font-size:14px;color:var(--acid);">Yes <span style="color:var(--soft);">(no guardrails)</span></td></tr>
+        </tbody>
+      </table>
     </div>
 
     <p class="section-kicker reveal" style="color:var(--acid);">Control Two</p>
@@ -885,7 +905,7 @@
         </div>
       </div>
     </div>
-    <p class="body-md reveal" style="text-align:center;margin-top:36px;color:var(--muted);max-width:66ch;margin-left:auto;margin-right:auto;">Beginner advice: stay in <strong style="color:var(--ink);">Ask first</strong> mode at the start. Read what Claude wants to do, then Accept. Once it feels familiar, try Plan mode for bigger jobs and Auto for the boring ones.</p>
+    <p class="body-md reveal" style="text-align:center;margin-top:36px;color:var(--muted);max-width:66ch;margin-left:auto;margin-right:auto;">Beginner advice: stay in <strong style="color:var(--ink);">Ask permissions</strong> mode at the start. Read what Claude wants to do, then Accept. Once it feels familiar, try Plan mode for bigger jobs and Auto mode for the boring ones.</p>
   </div>
 </section>
 
