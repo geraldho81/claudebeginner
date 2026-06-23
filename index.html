@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Claude for Complete Beginners. A plain-English masterclass on using the Claude app: chats, projects, skills, connectors, plugins, and routines." />
+  <title>Claude for Complete Beginners — Axecute Masterclass</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://res.cloudinary.com/dsg6ukzzt/image/upload/v1776672478/axecute/axecute-logo.svg" type="image/svg+xml" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --ink: #f4f1ea;
+      --muted: #b9b4aa;
+      --soft: #8f897e;
+      --void: #070807;
+      --carbon: #10110f;
+      --graphite: #191a17;
+      --line: rgba(244,241,234,0.15);
+      --line-strong: rgba(244,241,234,0.28);
+      --acid: #b7ff2a;
+      --cyan: #6af4ff;
+      --shadow: rgba(0,0,0,0.52);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--void);
+      color: var(--ink);
+      font-family: "Manrope", "Avenir Next", sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .grain {
+      position: fixed; inset: 0; z-index: 50; pointer-events: none; opacity: 0.13;
+      background-image: linear-gradient(115deg,rgba(255,255,255,0.08),transparent 30%),
+        repeating-radial-gradient(circle at 17% 24%,rgba(255,255,255,0.2) 0 1px,transparent 1px 4px);
+      mix-blend-mode: overlay;
+    }
+
+    .progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 200; background: rgba(244,241,234,0.06); }
+    .progress-fill { height: 100%; width: 0; background: var(--acid); }
+
+    .nav-dots {
+      position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 9px; z-index: 100;
+    }
+    .nav-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: rgba(244,241,234,0.18); cursor: pointer; transition: all 0.3s ease;
+    }
+    .nav-dot.active { background: var(--acid); transform: scale(1.6); }
+    .nav-dot:hover { background: rgba(183,255,42,0.55); }
+    @media (max-width: 900px) { .nav-dots { display: none; } }
+
+
+    /* Type */
+    h1, h2 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-weight: 400; letter-spacing: 0; line-height: 0.95; margin-bottom: 26px;
+    }
+    h1 { font-size: clamp(46px,8vw,92px); max-width: 18ch; }
+    h2 { font-size: clamp(34px,5vw,62px); }
+    h3 { font-size: 18px; font-weight: 700; line-height: 1.2; margin-bottom: 10px; }
+    p { margin-top: 0; }
+
+    .section-kicker {
+      margin: 0 0 18px; color: var(--acid);
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.18em;
+    }
+    .body-lg { font-size: clamp(17px,1.6vw,20px); line-height: 1.7; color: var(--muted); }
+    .body-md { font-size: clamp(14px,1.05vw,16px); line-height: 1.7; color: var(--muted); }
+
+    code {
+      font-family: "JetBrains Mono", monospace; font-size: 0.88em;
+      color: var(--acid); background: rgba(183,255,42,0.08); padding: 1px 5px; border-radius: 3px;
+    }
+    .hl { font-weight: 700; color: var(--acid); }
+
+    /* Buttons */
+    .button {
+      display: inline-flex; min-height: 46px; align-items: center; justify-content: center;
+      padding: 12px 20px; border: 1px solid var(--line-strong); border-radius: 6px;
+      font-family: "JetBrains Mono", monospace; font-size: 12px; font-weight: 700;
+      cursor: pointer; transition: transform 180ms ease, background 180ms ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button.primary { color: var(--void); background: var(--acid); border-color: var(--acid); }
+    .button.secondary { color: var(--ink); background: rgba(244,241,234,0.06); }
+
+    /* Cards (defined by background fill, no borders) */
+    .card { padding: 24px; border-radius: 8px; background: rgba(244,241,234,0.055); }
+    .card-carbon { padding: 24px; border-radius: 8px; background: var(--carbon); }
+    .card-acid { padding: 24px; border-radius: 8px; background: rgba(183,255,42,0.08); }
+    .card-cyan { padding: 24px; border-radius: 8px; background: rgba(106,244,255,0.07); }
+
+    /* App chat mockup panel */
+    .app-panel {
+      position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 12px;
+      background: linear-gradient(160deg,rgba(106,244,255,0.08),transparent 46%), #0c0d0b;
+      box-shadow: 0 30px 90px var(--shadow);
+    }
+    .app-topline { display: flex; align-items: center; gap: 7px; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+    .app-topline span.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); }
+    .app-topline .app-title { margin-left: 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--soft); letter-spacing: 0.08em; }
+    .app-body { padding: 22px 20px; display: flex; flex-direction: column; gap: 14px; }
+    .bubble-you, .bubble-claude {
+      max-width: 84%; padding: 12px 15px; border-radius: 12px; font-size: 14px; line-height: 1.55;
+    }
+    .bubble-you { align-self: flex-end; background: rgba(183,255,42,0.12); color: var(--ink); border-bottom-right-radius: 3px; }
+    .bubble-claude { align-self: flex-start; background: rgba(244,241,234,0.07); color: var(--muted); border-bottom-left-radius: 3px; }
+    .bubble-label { font-family: "JetBrains Mono", monospace; font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--soft); margin-bottom: 5px; }
+
+    /* Desktop app window mockup */
+    .desk-window {
+      position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden;
+      background: linear-gradient(165deg,rgba(106,244,255,0.06),transparent 44%), #0c0d0b;
+      box-shadow: 0 30px 90px var(--shadow);
+    }
+    .desk-bar { display: flex; align-items: center; gap: 7px; padding: 12px 14px; border-bottom: 1px solid var(--line); background: rgba(244,241,234,0.03); }
+    .desk-bar i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+    .desk-bar .r { background: #ff5f57; } .desk-bar .y { background: #febc2e; } .desk-bar .g { background: #28c840; }
+    .desk-bar b { margin-left: 10px; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 400; color: var(--soft); letter-spacing: 0.08em; }
+    .desk-grid { display: grid; grid-template-columns: 188px 1fr; }
+    .desk-side { padding: 14px 12px; display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,0.28); border-right: 1px solid var(--line); }
+    .desk-side .new { display:flex; align-items:center; gap:7px; justify-content:center; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700; color: var(--void); background: var(--acid); border-radius: 7px; padding: 9px 10px; margin-bottom: 6px; }
+    .desk-side .lbl { font-family: "JetBrains Mono", monospace; font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--soft); margin: 10px 4px 3px; }
+    .desk-side .si { font-size: 12.5px; color: var(--muted); padding: 7px 9px; border-radius: 6px; }
+    .desk-side .si.on { background: rgba(244,241,234,0.07); color: var(--ink); }
+    .desk-side .foot { margin-top: auto; padding: 8px 9px; font-size: 12px; color: var(--soft); display:flex; align-items:center; gap:7px; }
+    .desk-main { padding: 20px 18px; display: flex; flex-direction: column; gap: 12px; min-height: 290px; }
+    .desk-input { margin-top: auto; background: rgba(244,241,234,0.05); border-radius: 10px; padding: 12px 14px; display:flex; flex-direction:column; gap:10px; }
+    .desk-input .ph { font-size: 13px; color: var(--soft); }
+    .desk-input .row { display:flex; align-items:center; justify-content:space-between; }
+    .desk-chip { font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--muted); background: rgba(244,241,234,0.06); padding:5px 9px; border-radius:6px; display:inline-flex; align-items:center; gap:6px; }
+    .desk-send { width:26px; height:26px; border-radius:6px; background: var(--acid); color: var(--void); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; }
+    .tag { display:inline-flex; align-items:center; justify-content:center; width:19px; height:19px; border-radius:50%; background:var(--acid); color:var(--void); font-family:"JetBrains Mono",monospace; font-size:10px; font-weight:700; flex-shrink:0; }
+    @media (max-width: 600px) { .desk-grid { grid-template-columns: 1fr; } .desk-side { display: none; } }
+
+    /* Keycaps */
+    .kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 38px; height: 38px; padding: 0 11px; border-radius: 7px; background: rgba(244,241,234,0.09); font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--ink); box-shadow: 0 3px 0 rgba(0,0,0,0.45); }
+    .kbd-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    .kbd-plus { color: var(--soft); font-size: 14px; }
+
+    /* Img */
+    .img-cover { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Sections */
+    section { position: relative; width: 100%; overflow: hidden; }
+    .section-band { padding: 104px 28px; }
+    .section-inner { max-width: 1240px; margin: 0 auto; }
+
+    /* Two-col layout */
+    .split { display: grid; grid-template-columns: 1fr 1fr; width: 100%; min-height: 100vh; }
+    .split-left { display: flex; align-items: center; justify-content: center; padding: 8vh 6vw; }
+    .split-right { position: relative; min-height: 100vh; }
+    .split-copy { max-width: 500px; }
+
+    /* Reveal */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* Step pill */
+    .step-num {
+      width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(183,255,42,0.12); display: flex; align-items: center; justify-content: center;
+      font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--acid);
+    }
+
+    /* Site footer */
+    .site-footer {
+      display: flex; justify-content: space-between; gap: 24px;
+      padding: 28px; border-top: 1px solid var(--line);
+      color: var(--soft); font-family: "JetBrains Mono", monospace; font-size: 12px;
+    }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
+      .split { grid-template-columns: 1fr; min-height: auto; }
+      .split-right { min-height: 56vw; }
+      .three-col { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 760px) {
+      .section-band { padding: 72px 18px; }
+      .three-col, .four-col { grid-template-columns: 1fr !important; }
+      h1 { font-size: 42px; }
+      h2 { font-size: 32px; }
+      .site-footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="grain" aria-hidden="true"></div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+<div class="nav-dots" id="navDots"></div>
+
+
+<!-- 1. HERO -->
+<section id="sec-hero" data-nav="hero" style="min-height:100vh; display:flex; align-items:flex-end;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=2200&q=85" class="img-cover" alt="person at a laptop" style="filter:grayscale(0.74) contrast(1.12) brightness(0.5); transform:scale(1.02);" />
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,8,7,0.20) 0%,rgba(7,8,7,0.40) 48%,rgba(7,8,7,0.84) 100%);"></div>
+    <div style="position:absolute;inset:0;opacity:0.22;background-image:linear-gradient(rgba(244,241,234,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(244,241,234,0.12) 1px,transparent 1px);background-size:88px 88px;mask-image:linear-gradient(180deg,transparent,black 30%,black 70%,transparent);pointer-events:none;"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:10vh 28px 10vh;width:100%;max-width:1240px;margin:0 auto;">
+    <img src="https://res.cloudinary.com/dsg6ukzzt/image/upload/v1776672478/axecute/axecute-logo.svg" alt="Axecute" class="reveal" style="width:140px;height:auto;margin-bottom:18px;" />
+    <h1 class="reveal" style="max-width:15ch;">Claude<br><span style="font-style:italic;color:var(--muted);">for Complete Beginners</span></h1>
+    <p class="body-lg reveal" style="max-width:58ch;margin-bottom:36px;">Never used an AI assistant before? This is your starting line. We will walk through the Claude app one screen at a time, from your first message to the features that do real work for you: <strong style="color:var(--ink);">skills, connectors, plugins, and routines.</strong></p>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;" class="reveal">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--line);border-radius:4px;">No experience needed</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--line);border-radius:4px;">Plain English</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);padding:6px 12px;border:1px solid var(--line);border-radius:4px;">Click by click</span>
+    </div>
+    <a class="button primary reveal" href="#sec-what">Start learning</a>
+  </div>
+</section>
+
+
+<!-- 2. WHAT IS CLAUDE -->
+<section id="sec-what" data-nav="what" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Start Here</p>
+        <h2 class="reveal">What is Claude?</h2>
+        <p class="body-lg reveal" style="margin-bottom:20px;">Claude is an AI assistant made by a company called Anthropic. You type a question or a request, and it writes back in plain language, the same way a knowledgeable colleague would.</p>
+        <p class="body-md reveal">It can answer questions, write and edit documents, explain things simply, plan trips, summarise long files, and a lot more. You do not need to know anything technical to use it. If you can send a text message, you can use Claude.</p>
+      </div>
+    </div>
+    <div class="split-right">
+      <img src="https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="writing at a desk" style="filter:grayscale(0.55) contrast(1.1) brightness(0.72);" />
+    </div>
+  </div>
+</section>
+
+
+<!-- 3. WHERE CLAUDE LIVES -->
+<section id="sec-where" data-nav="where" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-right" style="order:-1;">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="people using devices" style="filter:grayscale(0.55) contrast(1.08) brightness(0.66);" />
+    </div>
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Three Ways In</p>
+        <h2 class="reveal">Where to Find Claude</h2>
+        <p class="body-md reveal" style="margin-bottom:18px;">It is the same Claude everywhere, signed in to one account. Pick whichever is easiest for you.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="card reveal">
+            <h3 style="color:var(--cyan);margin-bottom:4px;">In your web browser</h3>
+            <p class="body-md">Go to claude.ai and sign in. Nothing to install.</p>
+          </div>
+          <div class="card reveal">
+            <h3 style="margin-bottom:4px;">The desktop app</h3>
+            <p class="body-md">A free download for Mac and Windows. Some features, like scheduled tasks, only work here.</p>
+          </div>
+          <div class="card-acid reveal">
+            <h3 style="color:var(--acid);margin-bottom:4px;">On your phone</h3>
+            <p class="body-md" style="color:var(--muted);">The Claude app for iPhone and Android, including voice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 4. PLANS -->
+<section id="sec-plans" data-nav="plans" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">What It Costs</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:16px;">Free to Start</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:60ch;margin:0 auto 40px;">You can do a lot without paying anything. Paid plans mainly give you more usage per day and unlock the more powerful tools.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="four-col">
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:10px;">Free</p>
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:2.4rem;margin-bottom:10px;color:var(--ink);">$0</p>
+        <p class="body-md">Chat on web, desktop, and phone. Web search, memory, and file creation included.</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--cyan);margin-bottom:10px;">Pro</p>
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:2.4rem;margin-bottom:10px;color:var(--ink);">~$20<span style="font-size:1.2rem;color:var(--muted);">/mo</span></p>
+        <p class="body-md">More usage, plus Projects, deeper Research, and the most capable models.</p>
+      </div>
+      <div class="card-acid reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--acid);margin-bottom:10px;">Max</p>
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:2.4rem;margin-bottom:10px;color:var(--acid);">$100+<span style="font-size:1.2rem;color:rgba(183,255,42,0.6);">/mo</span></p>
+        <p class="body-md">For heavy daily users who want far more usage and early features.</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.14em;color:var(--muted);margin-bottom:10px;">Team</p>
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:2.4rem;margin-bottom:10px;color:var(--ink);">$20+<span style="font-size:1.2rem;color:var(--muted);">/seat</span></p>
+        <p class="body-md">For a workplace, with shared billing and admin controls.</p>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:28px;color:var(--muted);">Beginner advice: start on Free. Upgrade only once you hit a daily limit or want a feature you actually need.</p>
+  </div>
+</section>
+
+
+<!-- 5. YOUR FIRST CHAT -->
+<section id="sec-first" data-nav="first" style="min-height:100vh;display:flex;align-items:center;position:relative;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1920&q=80" class="img-cover" alt="calm workspace" style="filter:grayscale(0.72) contrast(1.1) brightness(0.42);" />
+    <div style="position:absolute;inset:0;background:rgba(7,8,7,0.62);"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:0 28px;width:100%;">
+    <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;" class="three-col">
+      <div class="app-panel reveal">
+        <div class="app-topline">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="app-title">claude.ai</span>
+        </div>
+        <div class="app-body">
+          <div>
+            <p class="bubble-label" style="text-align:right;">You</p>
+            <div class="bubble-you">Explain what an ETF is, like I am 12.</div>
+          </div>
+          <div>
+            <p class="bubble-label">Claude</p>
+            <div class="bubble-claude">Sure. An ETF is like a basket of many small investments you buy in one go, so your money is spread out instead of riding on a single company...</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="section-kicker reveal">Your First Minute</p>
+        <h2 class="reveal" style="color:var(--ink);">Just Start Typing</h2>
+        <p class="body-lg reveal" style="margin-bottom:16px;">Sign up at claude.ai with your email. You land on a screen with one big text box. Type a real question, press enter, and read the reply.</p>
+        <p class="body-md reveal">There is no wrong first message. Ask it to explain something, draft an email, or plan your week. To start over on a new topic, open a <span class="hl">new chat</span> so the old conversation does not get in the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 6. PICKING A MODEL -->
+<section id="sec-models" data-nav="models" class="section-band">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">The Model Picker</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:16px;">Which Claude Should I Pick?</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:62ch;margin:0 auto 38px;">Near the top of the screen you can choose a model. Each one trades speed for depth. When in doubt, leave it on the default and carry on.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;" class="four-col">
+      <div class="card reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--acid);margin-bottom:8px;">Haiku</p>
+        <h3 style="margin-bottom:6px;">Fast and light</h3>
+        <p class="body-md">Quick answers and simple questions. The speedy option.</p>
+      </div>
+      <div class="card reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--acid);margin-bottom:8px;">Sonnet</p>
+        <h3 style="margin-bottom:6px;">The daily driver</h3>
+        <p class="body-md">A balanced all-rounder for writing, planning, and everyday work.</p>
+      </div>
+      <div class="card reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--acid);margin-bottom:8px;">Opus</p>
+        <h3 style="margin-bottom:6px;">Deep thinker</h3>
+        <p class="body-md">Heavier reasoning for harder, more detailed tasks. On paid plans.</p>
+      </div>
+      <div class="card-acid reveal">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--acid);margin-bottom:8px;">Fable</p>
+        <h3 style="color:var(--acid);margin-bottom:6px;">Most capable</h3>
+        <p class="body-md" style="color:var(--muted);">For the biggest, most involved projects. On paid plans.</p>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:28px;color:var(--acid);">Beginner rule of thumb: Sonnet for most things, faster Haiku when you are in a hurry.</p>
+  </div>
+</section>
+
+
+<!-- 7. EVERYDAY FEATURES -->
+<section id="sec-everyday" data-nav="everyday" style="min-height:100vh;display:flex;align-items:center;position:relative;background:var(--carbon);">
+  <div class="section-band" style="width:100%;">
+    <div class="section-inner">
+      <p class="section-kicker reveal">The Basics</p>
+      <h2 class="reveal" style="margin-bottom:14px;">What You Can Do Every Day</h2>
+      <p class="body-lg reveal" style="max-width:60ch;margin-bottom:38px;">Before the power features, these are the everyday tools you will reach for most. All of them sit right inside the chat.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" class="three-col">
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Chat</h3>
+          <p class="body-md">Ask anything in plain words. Keep replying to refine the answer until it is right.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Upload files</h3>
+          <p class="body-md">Attach a PDF, photo, spreadsheet, or document and ask Claude to read or summarise it.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Artifacts</h3>
+          <p class="body-md">Longer answers, like a document or a small app, open in a side panel you can edit and reuse.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Web search</h3>
+          <p class="body-md">Claude can look things up online for current information instead of guessing.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Voice</h3>
+          <p class="body-md">On your phone you can talk to Claude and hear it answer, hands free.</p>
+        </div>
+        <div class="card-cyan reveal">
+          <h3 style="color:var(--cyan);margin-bottom:6px;">Memory</h3>
+          <p class="body-md">Claude can remember useful context from past chats so you repeat yourself less.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 8. PROJECTS -->
+<section id="sec-projects" data-nav="projects" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Stay Organised</p>
+        <h2 class="reveal">Projects:<br>A Folder for One Topic</h2>
+        <p class="body-lg reveal" style="margin-bottom:20px;">A Project is a workspace that keeps everything about one topic in one place: its chats, its files, and a set of instructions Claude follows every time.</p>
+        <p class="body-md reveal" style="margin-bottom:18px;">Say you run a small bakery. Make a "Bakery" project, drop in your menu and price list, and tell Claude to always answer in a warm, friendly tone. From then on, every chat inside that project already knows the background.</p>
+        <div class="card reveal">
+          <p class="body-md">Free accounts can make a handful of projects. It is the simplest way to stop re-explaining yourself.</p>
+        </div>
+      </div>
+    </div>
+    <div class="split-right">
+      <img src="https://images.unsplash.com/photo-1517842645767-c639042777db?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="organised notes" style="filter:grayscale(0.55) contrast(1.1) brightness(0.64);" />
+    </div>
+  </div>
+</section>
+
+
+<!-- 9. HOW TO TALK TO CLAUDE -->
+<section id="sec-talk" data-nav="talk" class="section-band" style="border-top:1px solid var(--line);">
+  <div class="section-inner">
+    <div style="height:28vh;border-radius:8px;overflow:hidden;margin-bottom:6vh;">
+      <img src="https://images.unsplash.com/photo-1587560699334-cc4ff634909a?auto=format&fit=crop&w=1600&q=85" class="img-cover" alt="conversation" style="filter:grayscale(0.55) contrast(1.1) brightness(0.62);" />
+    </div>
+    <p class="section-kicker reveal" style="text-align:center;">Getting Better Answers</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:14px;">How to Ask Well</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:60ch;margin:0 auto 36px;">You do not need clever tricks. The more you tell Claude about what you want, the better the reply. A good request usually has these four parts.</p>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;" class="four-col">
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--acid);margin-bottom:10px;">1</p>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">The task</p>
+        <p class="body-md">What you want made</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--acid);margin-bottom:10px;">2</p>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">Who it is for</p>
+        <p class="body-md">The reader or audience</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--acid);margin-bottom:10px;">3</p>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">The tone</p>
+        <p class="body-md">Formal, casual, short</p>
+      </div>
+      <div class="card reveal" style="text-align:center;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:1.5rem;color:var(--acid);margin-bottom:10px;">4</p>
+        <p style="font-weight:700;color:var(--ink);margin-bottom:6px;">The shape</p>
+        <p class="body-md">A list, an email, a table</p>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;color:var(--acid);">Instead of "write about dogs," try "write a friendly 100-word Instagram caption about adopting rescue dogs."</p>
+  </div>
+</section>
+
+
+<!-- 9b. DESKTOP: GET THE APP -->
+<section id="sec-desktop" data-nav="desktop" style="min-height:100vh;display:flex;align-items:center;background:var(--carbon);border-top:1px solid var(--line);">
+  <div class="section-band" style="width:100%;">
+    <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;" class="three-col">
+      <div>
+        <p class="section-kicker reveal">The Desktop App</p>
+        <h2 class="reveal">Put Claude on<br>Your Computer</h2>
+        <p class="body-lg reveal" style="margin-bottom:16px;">The desktop app is a free program you install on your Mac or Windows computer, the same way you install any other app. Claude then lives in its own window, ready the moment you need it. No browser tab to dig for.</p>
+        <p class="body-md reveal" style="margin-bottom:22px;">It is worth getting, because the desktop app can do a couple of things the website cannot: work with files on your own computer, and run tasks for you on a schedule. More on both in a moment.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="card reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num">1</div><p class="body-md">Go to <strong style="color:var(--ink);">claude.ai/download</strong> and choose Mac or Windows.</p></div>
+          <div class="card reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num">2</div><p class="body-md">Open the file you downloaded and follow the prompts.</p></div>
+          <div class="card-acid reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num" style="background:rgba(183,255,42,0.2);">3</div><p class="body-md">Sign in with the same account you already use. That is it.</p></div>
+        </div>
+      </div>
+      <div class="desk-window reveal">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude</b></div>
+        <div class="desk-grid">
+          <div class="desk-side">
+            <div class="new">+ New chat</div>
+            <div class="lbl">Recent</div>
+            <div class="si on">Dinner plan for the week</div>
+            <div class="si">Reply to the landlord</div>
+            <div class="si">Explain my insurance</div>
+            <div class="lbl">Projects</div>
+            <div class="si">Bakery</div>
+            <div class="foot">⚙ Settings</div>
+          </div>
+          <div class="desk-main">
+            <div>
+              <p class="bubble-label" style="text-align:right;">You</p>
+              <div class="bubble-you">Tidy these notes into a clean summary.</div>
+            </div>
+            <div>
+              <p class="bubble-label">Claude</p>
+              <div class="bubble-claude">Here is a tidy version, grouped into three short sections...</div>
+            </div>
+            <div class="desk-input">
+              <p class="ph">Reply to Claude...</p>
+              <div class="row"><span class="desk-chip">Sonnet</span><span class="desk-send">↑</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 9c. DESKTOP: TOUR -->
+<section id="sec-desktop-tour" data-nav="desktop-tour" class="section-band">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;" class="three-col">
+    <div class="desk-window reveal" style="order:-1;">
+      <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude</b></div>
+      <div class="desk-grid">
+        <div class="desk-side">
+          <div class="new"><span class="tag">2</span> + New chat</div>
+          <div class="lbl">Chats <span class="tag">1</span></div>
+          <div class="si on">Holiday packing list</div>
+          <div class="si">Budget questions</div>
+          <div class="si">Email to the school</div>
+          <div class="foot"><span class="tag">5</span> ⚙ Settings</div>
+        </div>
+        <div class="desk-main">
+          <div>
+            <p class="bubble-label">Claude</p>
+            <div class="bubble-claude">Hi. What would you like to do today?</div>
+          </div>
+          <div class="desk-input">
+            <p class="ph"><span class="tag">3</span> &nbsp;Type your message here...</p>
+            <div class="row"><span class="desk-chip"><span class="tag">4</span> Sonnet</span><span class="desk-send">↑</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-kicker reveal">A Quick Tour</p>
+      <h2 class="reveal" style="margin-bottom:24px;">What's on the Screen</h2>
+      <p class="body-md reveal" style="margin-bottom:20px;">It looks busier than it is. Really there are only five things to know.</p>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;"><span class="tag" style="margin-top:2px;">1</span><div><strong style="color:var(--ink);">The sidebar.</strong> <span class="body-md">Every past chat and project, down the left. Click one to reopen it.</span></div></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;"><span class="tag" style="margin-top:2px;">2</span><div><strong style="color:var(--ink);">New chat.</strong> <span class="body-md">Starts a fresh, blank conversation for a new topic.</span></div></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;"><span class="tag" style="margin-top:2px;">3</span><div><strong style="color:var(--ink);">The text box.</strong> <span class="body-md">Where you type. This is where almost everything happens.</span></div></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;"><span class="tag" style="margin-top:2px;">4</span><div><strong style="color:var(--ink);">The model picker.</strong> <span class="body-md">Switches between the Claudes from earlier. Leave it on the default if unsure.</span></div></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:flex-start;"><span class="tag" style="margin-top:2px;">5</span><div><strong style="color:var(--ink);">Settings.</strong> <span class="body-md">Where you turn features on and find the keyboard shortcuts.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 9d. DESKTOP: SHORTCUTS -->
+<section id="sec-desktop-keys" data-nav="desktop-keys" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">Work Faster</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:14px;">A Few Keys Worth Knowing</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:60ch;margin:0 auto 40px;">You never have to use these. But once they stick, the app feels twice as quick. On a Mac use the <strong style="color:var(--ink);">Cmd</strong> key; on Windows use <strong style="color:var(--ink);">Ctrl</strong>.</p>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:920px;margin:0 auto;" class="three-col">
+      <div class="card reveal">
+        <div class="kbd-row"><span class="kbd">Cmd</span><span class="kbd-plus">+</span><span class="kbd">N</span></div>
+        <h3 style="margin-bottom:4px;">Start a new chat</h3>
+        <p class="body-md">A blank conversation, instantly, without reaching for the mouse.</p>
+      </div>
+      <div class="card reveal">
+        <div class="kbd-row"><span class="kbd">Enter</span><span class="kbd-plus">to send</span><span class="kbd">Shift</span><span class="kbd-plus">+</span><span class="kbd">Enter</span></div>
+        <h3 style="margin-bottom:4px;">Send, or add a new line</h3>
+        <p class="body-md">Enter sends your message. Hold Shift and press Enter to write a second line first.</p>
+      </div>
+      <div class="card reveal">
+        <div class="kbd-row"><span class="kbd">Cmd</span><span class="kbd-plus">+</span><span class="kbd">K</span></div>
+        <h3 style="margin-bottom:4px;">Jump to any chat</h3>
+        <p class="body-md">Opens a search box. Type a few words and hop straight to an old conversation.</p>
+      </div>
+      <div class="card-acid reveal">
+        <div class="kbd-row"><span class="kbd">⌥</span><span class="kbd-plus">+</span><span class="kbd">Space</span></div>
+        <h3 style="color:var(--acid);margin-bottom:4px;">Summon Claude anywhere</h3>
+        <p class="body-md">Set a hotkey that pops Claude open over whatever you are doing, then hides it again.</p>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:28px;color:var(--muted);">Not sure of a key on your machine? Open <strong style="color:var(--ink);">Settings</strong> and the app lists every shortcut, including how to set the summon hotkey.</p>
+  </div>
+</section>
+
+
+<!-- 9e. DESKTOP: FILES -->
+<section id="sec-desktop-files" data-nav="desktop-files" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Your Files</p>
+        <h2 class="reveal">Drag a File<br>Straight In</h2>
+        <p class="body-lg reveal" style="margin-bottom:18px;">This is where the desktop app shines. Grab a document, photo, or spreadsheet from your desktop and drop it right onto the chat. Claude reads it and you can ask away.</p>
+        <p class="body-md reveal" style="margin-bottom:18px;">No saving, no uploading screen, no copy and paste. Just drag, drop, and ask "what does this say?" or "summarise this for me."</p>
+        <div class="card-cyan reveal">
+          <h3 style="color:var(--cyan);margin-bottom:6px;">A note on your computer's files</h3>
+          <p class="body-md">On the desktop app, Claude can also open and work with files in a folder on your computer, but only after you point it there and say yes. It never goes looking on its own.</p>
+        </div>
+      </div>
+    </div>
+    <div class="split-right" style="display:flex;align-items:center;justify-content:center;padding:8vh 6vw;background:var(--graphite);">
+      <div class="desk-window reveal" style="width:100%;max-width:440px;">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude</b></div>
+        <div class="desk-main" style="min-height:260px;">
+          <div style="border-radius:10px;background:rgba(106,244,255,0.08);padding:26px 18px;text-align:center;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.08em;">⬇ &nbsp;DROP FILE TO ADD</div>
+          <div style="display:flex;align-items:center;gap:12px;background:rgba(244,241,234,0.05);border-radius:10px;padding:12px 14px;">
+            <div style="width:34px;height:42px;border-radius:4px;background:rgba(244,241,234,0.12);display:flex;align-items:center;justify-content:center;font-size:16px;">📄</div>
+            <div><p style="font-size:13px;color:var(--ink);">Q3-report.pdf</p><p style="font-size:11px;color:var(--soft);">14 pages</p></div>
+          </div>
+          <div class="desk-input">
+            <p class="ph">Summarise this in five bullet points...</p>
+            <div class="row"><span class="desk-chip">Sonnet</span><span class="desk-send">↑</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 9f. DESKTOP: COWORK -->
+<section id="sec-desktop-cowork" data-nav="desktop-cowork" class="section-band">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;" class="three-col">
+    <div class="desk-window reveal" style="order:-1;">
+      <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude · Cowork</b></div>
+      <div class="desk-main" style="min-height:280px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);">Working now</p>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(183,255,42,0.08);border-radius:10px;padding:14px;">
+          <div style="width:9px;height:9px;border-radius:50%;background:var(--acid);"></div>
+          <div><p style="font-size:13px;color:var(--ink);">Sorting last month's receipts</p><p style="font-size:11px;color:var(--soft);">Step 3 of 5...</p></div>
+        </div>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);margin-top:6px;">Scheduled</p>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(244,241,234,0.05);border-radius:10px;padding:14px;">
+          <div style="font-size:16px;">🔁</div>
+          <div><p style="font-size:13px;color:var(--ink);">Morning news brief</p><p style="font-size:11px;color:var(--soft);">Every day, 7:00am</p></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;background:rgba(244,241,234,0.05);border-radius:10px;padding:14px;">
+          <div style="font-size:16px;">🔁</div>
+          <div><p style="font-size:13px;color:var(--ink);">Weekly numbers summary</p><p style="font-size:11px;color:var(--soft);">Mondays, 9:00am</p></div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <p class="section-kicker reveal">Hands-Off Work</p>
+      <h2 class="reveal" style="margin-bottom:18px;">Let Claude Work<br>in the Background</h2>
+      <p class="body-lg reveal" style="margin-bottom:16px;">The desktop app has a roomier space called <strong style="color:var(--ink);">Cowork</strong>. It is for bigger jobs, the kind that take a few steps, so Claude can keep working while you get on with something else.</p>
+      <p class="body-md reveal" style="margin-bottom:18px;">This is also where <strong style="color:var(--ink);">scheduled tasks</strong> live: jobs you set up once and Claude runs on a timer, like a news brief every morning or a summary every Monday. We will set one up together in a few slides.</p>
+      <div class="card reveal">
+        <p class="body-md">Think of the normal chat box as a quick conversation, and Cowork as handing over a small project and walking away.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 9g. DESKTOP: HABITS -->
+<section id="sec-desktop-habits" data-nav="desktop-habits" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">Good Habits</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:14px;">How Regulars Actually Use It</h2>
+    <p class="body-lg reveal" style="text-align:center;max-width:62ch;margin:0 auto 40px;">None of this is complicated. These are just the small habits that turn the app from a novelty into something you lean on daily.</p>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;" class="three-col">
+      <div class="card reveal">
+        <h3 style="margin-bottom:6px;">Leave it open</h3>
+        <p class="body-md">Keep the app running in the background. The summon hotkey makes it as quick to reach as a notepad.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:6px;">One project per part of life</h3>
+        <p class="body-md">A project for work, one for home, one for a hobby. Each one already knows its background.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:6px;">Drag, don't paste</h3>
+        <p class="body-md">When a file is involved, drop it straight in. Faster and tidier than copying text out.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:6px;">Let the boring bits repeat</h3>
+        <p class="body-md">Anything you do at the same time each week is a candidate for a scheduled task.</p>
+      </div>
+      <div class="card reveal">
+        <h3 style="margin-bottom:6px;">Keep replying</h3>
+        <p class="body-md">The first answer is a starting point. Say "shorter," "warmer," or "add an example" to steer it.</p>
+      </div>
+      <div class="card-acid reveal">
+        <h3 style="color:var(--acid);margin-bottom:6px;">Start small</h3>
+        <p class="body-md" style="color:var(--muted);">Pick one habit this week. Add another when the first feels natural. No need to rush.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 10. FOUR FEATURES INTRO -->
+<section id="sec-power" data-nav="power" style="min-height:70vh;display:flex;align-items:center;position:relative;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=80" class="img-cover" alt="connected world" style="filter:grayscale(0.72) contrast(1.08) brightness(0.4);" />
+    <div style="position:absolute;inset:0;background:rgba(7,8,7,0.66);"></div>
+    <div style="position:absolute;inset:0;opacity:0.18;background-image:linear-gradient(rgba(244,241,234,0.12) 1px,transparent 1px),linear-gradient(90deg,rgba(244,241,234,0.1) 1px,transparent 1px);background-size:84px 84px;pointer-events:none;"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:10vh 28px;width:100%;text-align:center;">
+    <div class="section-inner" style="max-width:820px;">
+      <p class="section-kicker reveal">The Power Features</p>
+      <h2 class="reveal" style="color:var(--ink);margin-bottom:24px;">Four Tools Worth Learning</h2>
+      <p class="body-lg reveal" style="margin-bottom:34px;">Once chatting feels natural, these four turn Claude from a clever helper into something that does real work for you. We will take them one at a time.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;" class="reveal">
+        <span class="button secondary">01 · Skills</span>
+        <span class="button secondary">02 · Connectors</span>
+        <span class="button secondary">03 · Plugins</span>
+        <span class="button secondary">04 · Routines</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11. SKILLS -->
+<section id="sec-skills" data-nav="skills" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-right" style="order:-1;">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="finished work" style="filter:grayscale(0.55) contrast(1.1) brightness(0.62);" />
+    </div>
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Feature 01</p>
+        <h2 class="reveal">Skills:<br>Claude Makes Real Files</h2>
+        <p class="body-lg reveal" style="margin-bottom:18px;">A Skill is an add-on that makes Claude an expert at a specific job. The most useful ones let Claude build proper files for you, not just describe them.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">PowerPoint</p><p class="body-md">Slide decks</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Excel</p><p class="body-md">Spreadsheets with formulas</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Word</p><p class="body-md">Formatted documents</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">PDF</p><p class="body-md">Reports and forms</p></div>
+        </div>
+        <div class="card-acid reveal">
+          <p class="body-md">Ask "make me a PowerPoint about our Q3 results" and Claude hands back a real .pptx file to download.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11b. SKILLS: HOW -->
+<section id="sec-skills-how" data-nav="skills-how" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">Turning Skills On</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:36px;">Three Small Steps</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1000px;margin:0 auto;" class="three-col">
+      <div class="card reveal" style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="step-num">1</div>
+        <div>
+          <h3 style="margin-bottom:6px;">Open Settings</h3>
+          <p class="body-md">Go to <strong style="color:var(--ink);">Settings, then Capabilities</strong>, and switch on "Code execution and file creation." Skills need this to work.</p>
+        </div>
+      </div>
+      <div class="card reveal" style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="step-num">2</div>
+        <div>
+          <h3 style="margin-bottom:6px;">Open the Skills list</h3>
+          <p class="body-md">Go to <strong style="color:var(--ink);">Customize, then Skills</strong>, and toggle on the ones you want, like PowerPoint or Excel.</p>
+        </div>
+      </div>
+      <div class="card-acid reveal" style="display:flex;gap:16px;align-items:flex-start;">
+        <div class="step-num" style="background:rgba(183,255,42,0.2);">3</div>
+        <div>
+          <h3 style="color:var(--acid);margin-bottom:6px;">Just ask</h3>
+          <p class="body-md">Describe what you want in plain words. Claude picks the right skill on its own. No buttons to press mid-task.</p>
+        </div>
+      </div>
+    </div>
+    <p class="body-md reveal" style="text-align:center;margin-top:30px;color:var(--muted);max-width:64ch;margin-left:auto;margin-right:auto;">Skills work on Free and paid plans. Feeling adventurous later? You can even create your own and upload it as a zip file.</p>
+  </div>
+</section>
+
+
+<!-- 12. CONNECTORS -->
+<section id="sec-connectors" data-nav="connectors" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Feature 02</p>
+        <h2 class="reveal">Connectors:<br>Plug In Your Apps</h2>
+        <p class="body-lg reveal" style="margin-bottom:18px;">A Connector gives Claude secure access to an app you already use, like Google Drive or your calendar. Instead of copy-pasting, Claude can look things up for you.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Google Drive</p><p class="body-md">Find and read your docs</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Calendar</p><p class="body-md">Summarise your week</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Gmail</p><p class="body-md">Search and draft replies</p></div>
+          <div class="card reveal" style="padding:14px;text-align:center;"><p style="font-weight:700;color:var(--cyan);">Notion, Slack</p><p class="body-md">Read and post updates</p></div>
+        </div>
+        <p class="body-md reveal">Other popular ones include Canva, GitHub, Linear, and Asana.</p>
+      </div>
+    </div>
+    <div class="split-right">
+      <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="connections" style="filter:grayscale(0.55) contrast(1.1) brightness(0.6);" />
+    </div>
+  </div>
+</section>
+
+
+<!-- 12b. CONNECTORS: HOW + SAFETY -->
+<section id="sec-connectors-how" data-nav="connectors-how" class="section-band" style="background:var(--graphite);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;" class="three-col">
+    <div>
+      <p class="section-kicker reveal">Adding One</p>
+      <h2 class="reveal" style="margin-bottom:24px;">How to Connect</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num">1</div><p class="body-md">Go to <strong style="color:var(--ink);">Customize, then Connectors</strong>.</p></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num">2</div><p class="body-md">Browse the list and click <strong style="color:var(--ink);">Connect</strong> on the app you want.</p></div>
+        <div class="card reveal" style="display:flex;gap:14px;align-items:center;"><div class="step-num">3</div><p class="body-md">Sign in to that app and approve access. That is the standard, safe sign-in step.</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="card-cyan reveal" style="margin-bottom:14px;">
+        <h3 style="color:var(--cyan);margin-bottom:8px;">One thing to know about safety</h3>
+        <p class="body-md">Claude only gets the same access you already have. If you cannot open a file in that app, neither can Claude.</p>
+      </div>
+      <div class="card reveal">
+        <p class="body-md">Sensible habit: only connect apps you trust and actually need. You can switch any connector off at any time, or just for one chat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 13. PLUGINS (honest framing) -->
+<section id="sec-plugins" data-nav="plugins" style="min-height:100vh;display:flex;align-items:center;position:relative;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1920&q=80" class="img-cover" alt="toolkit" style="filter:grayscale(0.72) contrast(1.08) brightness(0.44);" />
+    <div style="position:absolute;inset:0;background:rgba(7,8,7,0.64);"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:10vh 28px;width:100%;">
+    <div class="section-inner">
+      <p class="section-kicker reveal">Feature 03</p>
+      <h2 class="reveal" style="color:var(--ink);margin-bottom:20px;">Plugins: A Toolkit in One Click</h2>
+      <p class="body-lg reveal" style="margin-bottom:30px;max-width:680px;">A Plugin is a ready-made bundle of extras you install in one go, instead of setting each piece up by hand. Think of it as a starter kit someone else already packed for you.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:980px;margin-bottom:28px;" class="three-col">
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Shortcuts</h3>
+          <p class="body-md">Saved commands for tasks you repeat, triggered with a slash.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Helper agents and skills</h3>
+          <p class="body-md">Extra specialists and abilities, bundled together and ready to use.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Connections</h3>
+          <p class="body-md">App connections, all wired up inside the same package.</p>
+        </div>
+      </div>
+      <div class="card-acid reveal" style="max-width:760px;">
+        <p class="body-md"><strong style="color:var(--acid);">Worth knowing:</strong> plugins live in the more advanced tools, Claude Code and Cowork, not the basic chat box. As a beginner you do not need them yet. In the everyday app, Connectors and Projects already cover most of the same ground.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 14. ROUTINES (honest framing) -->
+<section id="sec-routines" data-nav="routines" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-right" style="order:-1;">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1200&q=80" class="img-cover" alt="morning routine" style="filter:grayscale(0.55) contrast(1.1) brightness(0.6);" />
+    </div>
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Feature 04</p>
+        <h2 class="reveal">Routines:<br>Work That Repeats Itself</h2>
+        <p class="body-lg reveal" style="margin-bottom:18px;">A Routine is a task you set up once and Claude runs on a schedule. You write the instructions a single time, then pick how often: every morning, every Monday, and so on.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+          <div class="card reveal" style="padding:14px 18px;"><p class="body-md">A daily news brief on the topics you care about</p></div>
+          <div class="card reveal" style="padding:14px 18px;"><p class="body-md">A Monday summary of last week's numbers</p></div>
+          <div class="card reveal" style="padding:14px 18px;"><p class="body-md">A morning rundown of your calendar and inbox</p></div>
+        </div>
+        <div class="card-cyan reveal">
+          <p class="body-md">In the desktop app this is called <strong style="color:var(--cyan);">Scheduled tasks</strong> (inside Cowork). "Routines" is the matching feature for the developer tool, Claude Code.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 14b. ROUTINES: HOW -->
+<section id="sec-routines-how" data-nav="routines-how" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <p class="section-kicker reveal" style="text-align:center;">Setting One Up</p>
+    <h2 class="reveal" style="text-align:center;margin-bottom:36px;">A Scheduled Task in the Desktop App</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:1040px;margin:0 auto 28px;" class="four-col">
+      <div class="card reveal" style="text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--acid);margin-bottom:8px;">1</p><p style="font-weight:700;color:var(--ink);margin-bottom:6px;">Open Cowork</p><p class="body-md">In the desktop app, switch to the Cowork tab.</p></div>
+      <div class="card reveal" style="text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--acid);margin-bottom:8px;">2</p><p style="font-weight:700;color:var(--ink);margin-bottom:6px;">New task</p><p class="body-md">Click Scheduled in the sidebar, then New task.</p></div>
+      <div class="card reveal" style="text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--acid);margin-bottom:8px;">3</p><p style="font-weight:700;color:var(--ink);margin-bottom:6px;">Write it once</p><p class="body-md">Name it, type the prompt, and pick how often it runs.</p></div>
+      <div class="card-acid reveal" style="text-align:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:1.4rem;color:var(--acid);margin-bottom:8px;">4</p><p style="font-weight:700;color:var(--acid);margin-bottom:6px;">Save</p><p class="body-md">Claude runs it on schedule and delivers the result.</p></div>
+    </div>
+    <div class="card-cyan reveal" style="max-width:720px;margin:0 auto;text-align:center;">
+      <p class="body-md">One catch: a desktop scheduled task only runs while your computer is awake and the app is open. It is a paid-plan feature.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 15. SAFETY -->
+<section id="sec-safety" data-nav="safety" class="section-band">
+  <div class="section-inner" style="display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center;" class="three-col">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;height:52vh;">
+      <div style="border-radius:8px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=crop&w=600&q=80" class="img-cover" alt="calm" style="filter:grayscale(0.6) contrast(1.1) brightness(0.66);" onerror="this.src='https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80'" /></div>
+      <div style="border-radius:8px;overflow:hidden;margin-top:28px;"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=600&q=80" class="img-cover" alt="checklist" style="filter:grayscale(0.6) contrast(1.1) brightness(0.66);" /></div>
+    </div>
+    <div>
+      <p class="section-kicker reveal">Use It Sensibly</p>
+      <h2 class="reveal" style="margin-bottom:24px;">A Few Good Habits</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Check important facts</h3>
+          <p class="body-md">Claude is usually right, but not always. For anything that matters, like health, money, or legal points, confirm it elsewhere.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-bottom:6px;">Mind what you share</h3>
+          <p class="body-md">Avoid pasting passwords or other people's private details. Treat it like a smart but unknown helper.</p>
+        </div>
+        <div class="card-acid reveal">
+          <h3 style="color:var(--acid);margin-bottom:6px;">Connect only what you trust</h3>
+          <p class="body-md">Each connector is a standing key to one of your accounts. Add only the ones you genuinely use, and remove the rest.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 16. FIRST WIN -->
+<section id="sec-win" data-nav="win" style="min-height:100vh;display:flex;align-items:center;position:relative;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1920&q=80" class="img-cover" alt="first step" style="filter:grayscale(0.72) contrast(1.08) brightness(0.44);" />
+    <div style="position:absolute;inset:0;background:rgba(7,8,7,0.64);"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:10vh 28px;width:100%;">
+    <div style="max-width:720px;">
+      <p class="section-kicker reveal">Try It Today</p>
+      <h2 class="reveal" style="color:var(--ink);">Pick One Small Win</h2>
+      <div class="card reveal" style="margin-bottom:18px;">
+        <p class="body-lg" style="color:var(--ink);margin-bottom:14px;">Do not ask "what can AI do?" Ask "what do I keep putting off?" Then hand that one thing to Claude.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;">
+          <li class="body-md">Turn three pages of messy notes into a tidy summary</li>
+          <li class="body-md">Draft the reply to that email you have been avoiding</li>
+          <li class="body-md">Plan a week of simple dinners from what is in your fridge</li>
+        </ul>
+      </div>
+      <p class="body-md reveal" style="color:var(--muted);">Pick one. Try it before you close this page.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 17. RECAP -->
+<section id="sec-recap" data-nav="recap" style="min-height:100vh;display:flex;align-items:center;position:relative;">
+  <div style="position:absolute;inset:0;z-index:0;">
+    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80" class="img-cover" alt="recap" style="filter:grayscale(0.72) contrast(1.08) brightness(0.4);" />
+    <div style="position:absolute;inset:0;background:rgba(7,8,7,0.68);"></div>
+  </div>
+  <div style="position:relative;z-index:2;padding:10vh 28px;width:100%;text-align:center;">
+    <div class="section-inner" style="max-width:820px;">
+      <p class="section-kicker reveal">The Whole Thing, Briefly</p>
+      <h2 class="reveal" style="color:var(--ink);margin-bottom:36px;">What to Remember</h2>
+      <div style="display:flex;flex-direction:column;gap:12px;text-align:left;">
+        <div class="card reveal" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div style="width:46px;height:46px;border-radius:8px;background:rgba(106,244,255,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;">💬</div>
+          <p class="body-md" style="flex:1;min-width:220px;"><strong style="color:var(--ink);">Chat first.</strong> Type plainly, reply to refine, start a new chat for new topics.</p>
+        </div>
+        <div class="card reveal" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div style="width:46px;height:46px;border-radius:8px;background:rgba(244,241,234,0.08);display:flex;align-items:center;justify-content:center;font-size:1.3rem;">📄</div>
+          <p class="body-md" style="flex:1;min-width:220px;"><strong style="color:var(--ink);">Skills</strong> make real files. <strong style="color:var(--ink);">Connectors</strong> plug in your apps.</p>
+        </div>
+        <div class="card-acid reveal" style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <div style="width:46px;height:46px;border-radius:8px;background:rgba(183,255,42,0.14);display:flex;align-items:center;justify-content:center;font-size:1.3rem;">🔁</div>
+          <p class="body-md" style="flex:1;min-width:220px;color:var(--muted);"><strong style="color:var(--acid);">Plugins and Routines</strong> are for later: bundled toolkits and tasks that run on a schedule.</p>
+        </div>
+      </div>
+      <p class="body-md reveal" style="margin-top:36px;color:var(--muted);">You do not have to learn it all at once. Start with chat. Add the rest when you need it.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 18. CLOSING -->
+<section style="min-height:60vh;display:flex;align-items:center;justify-content:center;background:var(--void);border-top:1px solid var(--line);padding:8vh 28px;">
+  <div style="text-align:center;max-width:680px;">
+    <a href="../index.html" style="display:block;margin:0 auto 32px;">
+      <img src="https://res.cloudinary.com/dsg6ukzzt/image/upload/v1776672478/axecute/axecute-logo.svg" alt="Axecute" style="width:140px;height:auto;margin:0 auto;" />
+    </a>
+    <h2 style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:400;color:var(--ink);margin-bottom:18px;line-height:1.05;">You're ready.<br><span style="color:var(--muted);">Now go say hello to Claude.</span></h2>
+    <p style="font-size:1rem;line-height:1.7;color:var(--muted);margin-bottom:36px;max-width:460px;margin-left:auto;margin-right:auto;">The best way to learn is to open the app, type one real question, and see what comes back. Start there.</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:48px;">
+      <a href="https://claude.ai" target="_blank" rel="noopener" class="button primary">Open Claude</a>
+    </div>
+    <div style="border-top:1px solid var(--line);padding-top:28px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--soft);">A beginner's masterclass · Axecute</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <span>Axecute</span>
+  <a href="../index.html" style="color:var(--acid);">Back to axecute.ai</a>
+</footer>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Progress bar
+  const progressFill = document.getElementById('progressFill');
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    progressFill.style.width = (scrollTop / docHeight) * 100 + '%';
+  });
+
+  // Nav dots
+  const sections = document.querySelectorAll('section[data-nav]');
+  const navDotsContainer = document.getElementById('navDots');
+  sections.forEach((sec, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => sec.scrollIntoView({ behavior: 'smooth' });
+    navDotsContainer.appendChild(dot);
+  });
+  const navDots = document.querySelectorAll('.nav-dot');
+  window.addEventListener('scroll', () => {
+    let current = 0;
+    sections.forEach((sec, i) => {
+      if (sec.getBoundingClientRect().top <= window.innerHeight / 2) current = i;
+    });
+    navDots.forEach((d, i) => d.classList.toggle('active', i === current));
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Image parallax
+  document.querySelectorAll('section img.img-cover').forEach(img => {
+    if (img.closest('.card')) return;
+    gsap.to(img, {
+      yPercent: 10, ease: 'none',
+      scrollTrigger: { trigger: img.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+  });
+</script>
+</body>
+</html>
