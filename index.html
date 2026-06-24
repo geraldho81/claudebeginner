@@ -987,6 +987,76 @@
 </section>
 
 
+<!-- 11g. CLAUDE.md -->
+<section id="sec-claudemd" data-nav="claudemd" style="min-height:100vh;display:flex;align-items:center;">
+  <div class="split">
+    <div class="split-left">
+      <div class="split-copy">
+        <p class="section-kicker reveal">Coding · Memory</p>
+        <h2 class="reveal">CLAUDE.md:<br>A Note It Always Reads</h2>
+        <p class="body-lg reveal" style="margin-bottom:16px;">A <code>CLAUDE.md</code> is a plain note that lives with your project. Claude Code reads it automatically at the start of every session, so it is the place to write down the things you would otherwise have to repeat each time.</p>
+        <p class="body-md reveal" style="margin-bottom:18px;">House rules, how the project is laid out, the commands you use, your preferences in style and tone. Write it once, and Claude remembers it for good.</p>
+        <div class="card-cyan reveal">
+          <h3 style="color:var(--cyan);margin-bottom:8px;">Why bother?</h3>
+          <p class="body-md">Less repeating yourself, and more consistent results. It is the single biggest thing you can do to make Claude Code feel like it already knows your project.</p>
+        </div>
+      </div>
+    </div>
+    <div class="split-right">
+      <div class="desk-window reveal">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Two homes for your notes</b></div>
+        <div class="desk-main" style="min-height:300px;">
+          <div class="card" style="border-left:3px solid var(--cyan);">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px;">Global · ~/.claude/CLAUDE.md</p>
+            <h3 style="margin-bottom:4px;">Rules for everything</h3>
+            <p class="body-md">Lives in your home folder and applies to <strong style="color:var(--ink);">every</strong> project. Best for personal preferences, like "always explain in plain English."</p>
+          </div>
+          <div class="card" style="border-left:3px solid var(--acid);">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--acid);margin-bottom:6px;">Project · ./CLAUDE.md</p>
+            <h3 style="margin-bottom:4px;">Rules for this project</h3>
+            <p class="body-md">Lives in the project folder and applies to <strong style="color:var(--ink);">just that one</strong>. Best for facts about this codebase. It can be shared with your team too.</p>
+          </div>
+          <p class="body-md" style="color:var(--muted);">Claude reads both, with the project note taking priority where they overlap.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11h. /init -->
+<section id="sec-init" data-nav="init" class="section-band" style="background:var(--carbon);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5vw;align-items:center;" class="three-col">
+      <div>
+        <p class="section-kicker reveal">Coding · One Command</p>
+        <h2 class="reveal" style="margin-bottom:18px;">/init: Let Claude<br>Write the First Draft</h2>
+        <p class="body-lg reveal" style="margin-bottom:16px;">Staring at a blank <code>CLAUDE.md</code> is the hard part. You do not have to. Type <code>/init</code> in Claude Code and it will write the first draft for you.</p>
+        <p class="body-md reveal" style="margin-bottom:18px;">Claude reads through your whole project, works out how it is built and which commands it uses, and saves a tidy <code>CLAUDE.md</code> in the folder. From there you just tweak it.</p>
+        <div class="card-acid reveal">
+          <p class="body-md">Run <code>/init</code> once on any project you work in often. Then add a line whenever you catch yourself explaining the same thing twice.</p>
+        </div>
+      </div>
+      <div class="desk-window reveal">
+        <div class="desk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><b>Claude Code</b></div>
+        <div class="desk-main" style="min-height:280px;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--acid);">&gt; /init</p>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <p class="body-md" style="color:var(--muted);">Reading your project files...</p>
+            <p class="body-md" style="color:var(--cyan);">✓ &nbsp;Found the layout and main commands</p>
+            <p class="body-md" style="color:var(--cyan);">✓ &nbsp;Drafted a CLAUDE.md for you</p>
+            <p class="body-md" style="color:var(--cyan);">✓ &nbsp;Saved it in your project folder</p>
+          </div>
+          <div class="card" style="margin-top:4px;display:flex;gap:14px;align-items:center;">
+            <p class="body-md" style="color:var(--ink);">Now every future session starts already knowing the basics.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <!-- 12. CONNECTORS -->
 <section id="sec-connectors" data-nav="connectors" style="min-height:100vh;display:flex;align-items:center;">
   <div class="split">
